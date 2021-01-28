@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "ScrapeCraigslist";
+}
+
+<h2>Scrape Craigslist</h2>
+
+@if (ViewBag.Check == null)
+{
+    <h4>What would you like to search for?</h4>
+    <br />
+
+    <form action="/Home/ScrapeCraigslist" method="post">
+        Search: <input type="text" name="aSearch" />
+        City:   <input type="text" name="aCity" />
+        <input type="submit" name="btnSubmit" value="Search" />
+    </form>
+}
+
+else
+{
+    <form action="/Home/ScrapeCraigslist" method="post">
+        Search: <input type="text" name="aSearch" />
+        City:   <input type="text" name="aCity" />
+        <input type="submit" name="btnSubmit" value="Search" />
+    </form>
+    <br />
+
+    <table border="1">
+        <tr>
+            <th>    Date            </th>
+            <th>    Price           </th>
+            <th>    Title           </th>
+            <!--<th>    Description     </th>-->
+            <th>    Link            </th>
+        </tr>
+
+        @foreach (var p in ViewBag.ListOfCraigslistPosts)
+        {
+            <tr>
+                <td>    @p.Date                     </td>
+                <td>    @p.Price                    </td>
+                <td>    @p.Title                    </td>
+                <!--<td>    @p.Description              </td>-->
+                <td>    <a href=@p.Link>@p.Link</a> </td>
+            </tr>
+        }
+    </table>
+}
